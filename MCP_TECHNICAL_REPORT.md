@@ -1,4 +1,4 @@
-```
+# MCP Technical Report
 
 **Compiler Options:**
 - **target: ES2022**: Modern JavaScript features
@@ -13,7 +13,6 @@
 
 ### MCP Protocol Flow
 
-```
 1. Bob IDE Startup
    ↓
 2. Read mcp_settings.json
