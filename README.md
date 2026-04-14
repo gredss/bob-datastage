@@ -119,13 +119,13 @@ Create or update `~/.bob/settings/mcp_settings.json`:
     "datastage": {
       "command": "node",
       "args": [
-        "/Users/graceesthersimanjuntak/Downloads/Me/bob-prompt2etl/datastage-server/build/index.js"
+        ".../Me/bob-prompt2etl/datastage-server/build/index.js"
       ],
       "env": {
-        "CPD_URL": "https://cpd-cpd.apps.69cde10d0f861135a8e55d44.ap1.techzone.ibm.com/",
-        "CPD_USERNAME": "admin",
-        "CPD_PASSWORD": "oBwgw-LIfvK-xuPzE-CkBji",
-        "CPD_PROJECT_ID": "4efb8e4d-15b2-486c-ba6f-d5c99f3d5272",
+        "CPD_URL": "https://...",
+        "CPD_USERNAME": "",
+        "CPD_PASSWORD": "",
+        "CPD_PROJECT_ID": "",
         "CACHE_TTL": "300",
         "LOG_LEVEL": "info"
       },
