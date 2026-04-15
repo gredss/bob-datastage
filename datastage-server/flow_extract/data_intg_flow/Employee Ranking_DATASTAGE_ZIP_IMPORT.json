@@ -1,0 +1,984 @@
+{
+  "primary_pipeline" : "d6332152-f4c2-4057-bb62-0b0794e82e19",
+  "pipelines" : [ {
+    "nodes" : [ {
+      "outputs" : [ {
+        "id" : "bb9f5ac9-d91b-4dba-867a-754758aa1ff2",
+        "app_data" : {
+          "datastage" : {
+            "is_source_of_link" : "710ba87e-ba00-4092-b83b-50b6be2133e4"
+          },
+          "ui_data" : {
+            "label" : "outPort",
+            "cardinality" : {
+              "min" : 0,
+              "max" : 1
+            }
+          },
+          "additionalProperties" : {
+            "enableAcp" : false
+          }
+        },
+        "parameters" : {
+          "valueDerivation" : [ ],
+          "buf_mode" : "default"
+        }
+      } ],
+      "op" : "dashdb",
+      "inputs" : [ {
+        "id" : "",
+        "app_data" : {
+          "ui_data" : {
+            "label" : "inPort",
+            "cardinality" : {
+              "min" : 0,
+              "max" : 1
+            }
+          }
+        },
+        "parameters" : {
+          "part_coll" : "part_type"
+        }
+      } ],
+      "connection" : {
+        "ref" : "51aee35a-e27b-411c-a355-55f65b5fdc05",
+        "project_ref" : "8833164a-8b3b-4596-aa4d-5b93dbdb897f",
+        "name" : "Data Warehouse",
+        "properties" : {
+          "_java._heap_size" : 256,
+          "currentOutputLinkType" : "PRIMARY",
+          "before_after.after_node" : "",
+          "before_after.before_node.fail_on_error" : true,
+          "before_after.after_node.fail_on_error" : true,
+          "outputAcpShouldHide" : true,
+          "before_after.before_node" : "",
+          "enableFlowAcpControl" : true,
+          "select_statement" : "(SELECT EMPLOYEE_CODE, COALESCE(MAX(SUMMARY_DATE), TIMESTAMP('1900-01-01 00:00:00')) MAX_DATE,\n\nCOALESCE(TIMESTAMPDIFF(16,\n\nCHAR(MAX(SUMMARY_DATE) - MIN(SUMMARY_DATE)) ), 0) as Period_Total_days,\n\nCOALESCE(MIN(SALARY), 0) Starting_salary,\n\nCOALESCE(MAX(SALARY), 0) Ending_SALARY,\n\nCOALESCE(MAX(SALARY) - MIN(SALARY), 0) increase,\n\nCOALESCE(SUM(CASE WHEN PAY_INCREASE = 0 THEN 0 ELSE 1 END), 0) nb_increases,\n\nCOALESCE(SUM(BONUS * SALARY), 0) BONUS,\n\nCOALESCE(SUM(CASE WHEN BONUS = 0 THEN 0 ELSE 1 END), 0) nb_bonus,\n\nCOALESCE(SUM(VACATION_DAYS_TAKEN), 0) VACATION_DAYS_TAKEN,\n\nCOALESCE(SUM(SICK_DAYS_TAKEN), 0) SICK_DAYS_TAKEN\n\nFROM EMPLOYEE.EMPLOYEE_SUMMARY E2\n\nWHERE (SUMMARY_DATE >= '#Start_Year#-01-01 00:00:00'\n\nAND SUMMARY_DATE < '#End_Year#-01-01 00:00:00')\n\nGROUP BY EMPLOYEE_CODE)",
+          "enableSchemalessDesign" : false,
+          "before_after.before" : "",
+          "before_after.before.fail_on_error" : true,
+          "node_number" : 0,
+          "read_mode" : "select",
+          "decimal_rounding_mode" : "floor",
+          "default_max_string_binary_precision" : 20000,
+          "generate_unicode_columns" : false,
+          "before_after.after" : "",
+          "node_count" : 1,
+          "before_after.after.fail_on_error" : true,
+          "procParamProperties" : [ ]
+        }
+      },
+      "id" : "189f2bfd-9b9f-45ae-8214-3cf7d70371c7",
+      "type" : "binding",
+      "app_data" : {
+        "ui_data" : {
+          "image" : "/data-intg/flows/graphics/palette/dashdb.svg",
+          "x_pos" : 221.76,
+          "label" : "EMPLOYEE_SUMMARY_1",
+          "y_pos" : 190.07999999999998
+        }
+      },
+      "parameters" : {
+        "combinability" : "auto",
+        "spparam" : [ ],
+        "output_count" : 1,
+        "input_count" : 0,
+        "execmode" : "default_par",
+        "preserve" : -3
+      }
+    }, {
+      "outputs" : [ {
+        "id" : "52bbb80b-ff79-476e-b5e1-100476a08149",
+        "app_data" : {
+          "datastage" : {
+            "is_source_of_link" : "acfabd55-483a-4893-89e5-0e690c7b0e55"
+          },
+          "ui_data" : {
+            "label" : "outPort",
+            "cardinality" : {
+              "min" : 0,
+              "max" : 1
+            }
+          },
+          "additionalProperties" : {
+            "enableAcp" : false
+          }
+        },
+        "parameters" : {
+          "reject_from_link" : -1,
+          "valueDerivation" : [ ],
+          "buf_mode" : "default"
+        }
+      } ],
+      "op" : "dashdb",
+      "inputs" : [ {
+        "id" : "",
+        "app_data" : {
+          "ui_data" : {
+            "label" : "inPort",
+            "cardinality" : {
+              "min" : 0,
+              "max" : 1
+            }
+          }
+        },
+        "parameters" : {
+          "part_coll" : "part_type"
+        }
+      } ],
+      "connection" : {
+        "ref" : "51aee35a-e27b-411c-a355-55f65b5fdc05",
+        "project_ref" : "8833164a-8b3b-4596-aa4d-5b93dbdb897f",
+        "name" : "Data Warehouse",
+        "properties" : {
+          "_java._heap_size" : 256,
+          "currentOutputLinkType" : "PRIMARY",
+          "before_after.after_node" : "",
+          "before_after.before_node.fail_on_error" : true,
+          "before_after.after_node.fail_on_error" : true,
+          "outputAcpShouldHide" : true,
+          "before_after.before_node" : "",
+          "enableFlowAcpControl" : true,
+          "enableSchemalessDesign" : false,
+          "select_statement" : "(SELECT EMP.EMPLOYEE_CODE, COALESCE(RANKING_CODE, 0) AS RANKING_CODE\n\nFROM EMPLOYEE.EMPLOYEE EMP LEFT OUTER JOIN\n\n(SELECT RK.*\n\nFROM EMPLOYEE.RANKING_RESULTS RK,\n\n(SELECT TB0.EMPLOYEE_CODE,\n\nMAX(TB0.RANKING_DATE) RANKING_DATE\n\nFROM EMPLOYEE.RANKING_RESULTS TB0\n\nWHERE RANKING_DATE < '#End_Year#-01-01 00:00:00'\n\nGROUP BY TB0.EMPLOYEE_CODE\n\n) TB1\n\nWHERE RK.EMPLOYEE_CODE = TB1.EMPLOYEE_CODE\n\nAND RK.RANKING_DATE = TB1.RANKING_DATE) RK1\n\nON EMP.EMPLOYEE_CODE = RK1.EMPLOYEE_CODE\n\n)",
+          "before_after.before" : "",
+          "before_after.before.fail_on_error" : true,
+          "node_number" : 0,
+          "read_mode" : "select",
+          "decimal_rounding_mode" : "floor",
+          "default_max_string_binary_precision" : 20000,
+          "generate_unicode_columns" : false,
+          "before_after.after" : "",
+          "node_count" : 1,
+          "before_after.after.fail_on_error" : true,
+          "procParamProperties" : [ ]
+        }
+      },
+      "id" : "9eb063b6-4351-4e95-aca7-4b55d6084e9c",
+      "type" : "binding",
+      "app_data" : {
+        "ui_data" : {
+          "image" : "/data-intg/flows/graphics/palette/dashdb.svg",
+          "x_pos" : 221.76,
+          "label" : "RANKING_RESULTS_1",
+          "y_pos" : 348.48
+        }
+      },
+      "parameters" : {
+        "combinability" : "auto",
+        "spparam" : [ ],
+        "output_count" : 1,
+        "input_count" : 0,
+        "execmode" : "default_par",
+        "preserve" : -3
+      }
+    }, {
+      "outputs" : [ {
+        "id" : "97075af2-aeda-4815-a4ea-c2f79a593183",
+        "app_data" : {
+          "datastage" : {
+            "is_source_of_link" : "2ef4912f-349a-4176-99cb-5a441d4ec0c8"
+          },
+          "ui_data" : {
+            "label" : "outPort",
+            "cardinality" : {
+              "min" : 0,
+              "max" : 2147483647
+            }
+          },
+          "additionalProperties" : {
+            "enableAcp" : true
+          }
+        },
+        "parameters" : {
+          "outputName" : "Link_3",
+          "buf_mode" : "default"
+        }
+      } ],
+      "op" : "PxPeek",
+      "inputs" : [ {
+        "links" : [ {
+          "node_id_ref" : "189f2bfd-9b9f-45ae-8214-3cf7d70371c7",
+          "type_attr" : "PRIMARY",
+          "id" : "710ba87e-ba00-4092-b83b-50b6be2133e4",
+          "app_data" : {
+            "datastage" : { },
+            "ui_data" : {
+              "decorations" : [ {
+                "image" : "/data-intg/flows/graphics/flows/link-output-handle--default-selected.svg",
+                "temporary" : false,
+                "outline" : false,
+                "distance" : 0,
+                "x_pos" : -10,
+                "id" : "dec-3",
+                "position" : "source",
+                "y_pos" : -10,
+                "class_name" : "linkStartImage"
+              }, {
+                "image" : "/data-intg/flows/graphics/flows/noMeta-auto-noACP.svg",
+                "temporary" : false,
+                "outline" : false,
+                "distance" : 0,
+                "width" : 70,
+                "tooltip" : "No columns\nAuto-partition\nAutomatic column propagation is disabled for this link",
+                "x_pos" : -26,
+                "id" : "dec-6Q",
+                "position" : "middle",
+                "y_pos" : 4,
+                "height" : 50
+              }, {
+                "temporary" : false,
+                "label_allow_return_key" : "save",
+                "label_single_line" : true,
+                "width" : 100,
+                "label_editable" : true,
+                "x_pos" : -18,
+                "id" : "dec-8",
+                "position" : "middle",
+                "label" : "Link_1",
+                "y_pos" : -20,
+                "height" : 80
+              } ],
+              "class_name" : "linkStyle__runMetricsLinkDefaultStyle___ixW31"
+            }
+          },
+          "link_name" : "Link_1",
+          "port_id_ref" : "bb9f5ac9-d91b-4dba-867a-754758aa1ff2"
+        } ],
+        "id" : "1f65bdd7-9cbd-41f4-b9ab-c3998c7a84ea",
+        "app_data" : {
+          "ui_data" : {
+            "label" : "inPort",
+            "cardinality" : {
+              "min" : 1,
+              "max" : 1
+            }
+          }
+        },
+        "parameters" : {
+          "runtime_column_propagation" : 1
+        }
+      } ],
+      "id" : "b1969d7c-5000-426f-a461-b77812539322",
+      "type" : "execution_node",
+      "app_data" : {
+        "datastage" : {
+          "inputs_order" : "1f65bdd7-9cbd-41f4-b9ab-c3998c7a84ea",
+          "outputs_order" : "97075af2-aeda-4815-a4ea-c2f79a593183"
+        },
+        "ui_data" : {
+          "image" : "/data-intg/flows/graphics/palette/PxPeek.svg",
+          "x_pos" : 459.36,
+          "label" : "Peek_1",
+          "y_pos" : 205.92
+        }
+      },
+      "parameters" : {
+        "all" : " ",
+        "showPartType" : true,
+        "columns" : " ",
+        "showCollType" : false,
+        "enableSchemalessDesign" : false,
+        "preserve" : -3,
+        "inputName" : "Link_1",
+        "showSortOptions" : false,
+        "combinability" : "auto",
+        "OutputlinkOrderingList" : [ {
+          "link_label" : "Output 1",
+          "link_name" : "Link_3"
+        } ],
+        "inputcolProperties" : [ ],
+        "nrecs" : 10,
+        "selection" : " ",
+        "output_count" : 1,
+        "valueDerivation" : "",
+        "execmode" : "default_par",
+        "input_count" : 1,
+        "name" : "name",
+        "enableSchemaLessDesign" : "",
+        "dataset" : " "
+      }
+    }, {
+      "outputs" : [ {
+        "id" : "7d830a03-6175-42c7-be1c-71e20c74c709",
+        "app_data" : {
+          "datastage" : {
+            "is_source_of_link" : "1d216e66-48fb-4ab0-b410-df90c94f03ac"
+          },
+          "ui_data" : {
+            "label" : "outPort",
+            "cardinality" : {
+              "min" : 0,
+              "max" : 2147483647
+            }
+          },
+          "additionalProperties" : {
+            "enableAcp" : true
+          }
+        },
+        "parameters" : {
+          "outputName" : "Link_4",
+          "buf_mode" : "default"
+        }
+      } ],
+      "op" : "PxPeek",
+      "inputs" : [ {
+        "links" : [ {
+          "node_id_ref" : "9eb063b6-4351-4e95-aca7-4b55d6084e9c",
+          "type_attr" : "PRIMARY",
+          "id" : "acfabd55-483a-4893-89e5-0e690c7b0e55",
+          "app_data" : {
+            "datastage" : { },
+            "ui_data" : {
+              "decorations" : [ {
+                "image" : "/data-intg/flows/graphics/flows/link-output-handle--default-selected.svg",
+                "temporary" : false,
+                "outline" : false,
+                "distance" : 0,
+                "x_pos" : -10,
+                "id" : "dec-3",
+                "position" : "source",
+                "y_pos" : -10,
+                "class_name" : "linkStartImage"
+              }, {
+                "image" : "/data-intg/flows/graphics/flows/noMeta-auto-noACP.svg",
+                "temporary" : false,
+                "outline" : false,
+                "distance" : 0,
+                "width" : 70,
+                "tooltip" : "No columns\nAuto-partition\nAutomatic column propagation is disabled for this link",
+                "x_pos" : -26,
+                "id" : "dec-6Q",
+                "position" : "middle",
+                "y_pos" : 4,
+                "height" : 50
+              }, {
+                "temporary" : false,
+                "label_allow_return_key" : "save",
+                "label_single_line" : true,
+                "width" : 100,
+                "label_editable" : true,
+                "x_pos" : -18,
+                "id" : "dec-8",
+                "position" : "middle",
+                "label" : "Link_2",
+                "y_pos" : -20,
+                "height" : 80
+              } ],
+              "class_name" : "linkStyle__runMetricsLinkDefaultStyle___ixW31"
+            }
+          },
+          "link_name" : "Link_2",
+          "port_id_ref" : "52bbb80b-ff79-476e-b5e1-100476a08149"
+        } ],
+        "id" : "2e584f77-19e1-4e5c-a31e-d3fed6009243",
+        "app_data" : {
+          "ui_data" : {
+            "label" : "inPort",
+            "cardinality" : {
+              "min" : 1,
+              "max" : 1
+            }
+          }
+        },
+        "parameters" : {
+          "runtime_column_propagation" : 1
+        }
+      } ],
+      "id" : "ce0b3bad-f596-40ed-9017-a0cbb585bb17",
+      "type" : "execution_node",
+      "app_data" : {
+        "datastage" : {
+          "inputs_order" : "2e584f77-19e1-4e5c-a31e-d3fed6009243",
+          "outputs_order" : "7d830a03-6175-42c7-be1c-71e20c74c709"
+        },
+        "ui_data" : {
+          "image" : "/data-intg/flows/graphics/palette/PxPeek.svg",
+          "x_pos" : 459.36,
+          "label" : "Peek_2",
+          "y_pos" : 348.48
+        }
+      },
+      "parameters" : {
+        "all" : " ",
+        "showPartType" : true,
+        "columns" : " ",
+        "showCollType" : false,
+        "enableSchemalessDesign" : false,
+        "preserve" : -3,
+        "inputName" : "Link_2",
+        "showSortOptions" : false,
+        "combinability" : "auto",
+        "OutputlinkOrderingList" : [ {
+          "link_label" : "Output 1",
+          "link_name" : "Link_4"
+        } ],
+        "inputcolProperties" : [ ],
+        "nrecs" : 10,
+        "selection" : " ",
+        "output_count" : 1,
+        "valueDerivation" : "",
+        "execmode" : "default_par",
+        "input_count" : 1,
+        "name" : "name",
+        "enableSchemaLessDesign" : "",
+        "dataset" : " "
+      }
+    }, {
+      "outputs" : [ {
+        "id" : "35fa7938-fd7c-4e3f-a986-e82009785bb8",
+        "app_data" : {
+          "datastage" : {
+            "is_source_of_link" : "b1723656-6373-4859-9563-c8c98169e9b4"
+          },
+          "ui_data" : {
+            "label" : "outPort",
+            "cardinality" : {
+              "min" : 1,
+              "max" : 1
+            }
+          },
+          "additionalProperties" : {
+            "enableAcp" : true
+          }
+        },
+        "parameters" : {
+          "buf_mode" : "default"
+        }
+      } ],
+      "op" : "PxJoin",
+      "inputs" : [ {
+        "links" : [ {
+          "node_id_ref" : "b1969d7c-5000-426f-a461-b77812539322",
+          "type_attr" : "PRIMARY",
+          "id" : "2ef4912f-349a-4176-99cb-5a441d4ec0c8",
+          "app_data" : {
+            "datastage" : { },
+            "ui_data" : {
+              "decorations" : [ {
+                "image" : "/data-intg/flows/graphics/flows/link-output-handle--default-selected.svg",
+                "temporary" : false,
+                "outline" : false,
+                "distance" : 0,
+                "x_pos" : -10,
+                "id" : "dec-3",
+                "position" : "source",
+                "y_pos" : -10,
+                "class_name" : "linkStartImage"
+              }, {
+                "image" : "/data-intg/flows/graphics/flows/noMeta-autoPartition.svg",
+                "temporary" : false,
+                "outline" : false,
+                "distance" : 5,
+                "width" : 70,
+                "tooltip" : "No columns\nAuto-partition",
+                "x_pos" : -27,
+                "id" : "dec-6W",
+                "position" : "middle",
+                "y_pos" : 4,
+                "height" : 50
+              }, {
+                "temporary" : false,
+                "label_allow_return_key" : "save",
+                "label_single_line" : true,
+                "width" : 100,
+                "label_editable" : true,
+                "x_pos" : -18,
+                "id" : "dec-8",
+                "position" : "middle",
+                "label" : "Link_3",
+                "y_pos" : -20,
+                "height" : 80
+              } ],
+              "class_name" : "linkStyle__runMetricsLinkDefaultStyle___ixW31"
+            }
+          },
+          "link_name" : "Link_3",
+          "port_id_ref" : "97075af2-aeda-4815-a4ea-c2f79a593183"
+        } ],
+        "id" : "4e5535c3-858a-4248-9d7a-9b080fa3b014",
+        "app_data" : {
+          "ui_data" : {
+            "label" : "inPort",
+            "cardinality" : {
+              "min" : 2,
+              "max" : 2147483646
+            }
+          }
+        },
+        "parameters" : {
+          "runtime_column_propagation" : 1
+        }
+      }, {
+        "links" : [ {
+          "node_id_ref" : "ce0b3bad-f596-40ed-9017-a0cbb585bb17",
+          "type_attr" : "PRIMARY",
+          "id" : "1d216e66-48fb-4ab0-b410-df90c94f03ac",
+          "app_data" : {
+            "datastage" : { },
+            "ui_data" : {
+              "decorations" : [ {
+                "image" : "/data-intg/flows/graphics/flows/link-output-handle--default-selected.svg",
+                "temporary" : false,
+                "outline" : false,
+                "distance" : 0,
+                "x_pos" : -10,
+                "id" : "dec-3",
+                "position" : "source",
+                "y_pos" : -10,
+                "class_name" : "linkStartImage"
+              }, {
+                "image" : "/data-intg/flows/graphics/flows/noMeta-autoPartition.svg",
+                "temporary" : false,
+                "outline" : false,
+                "distance" : 5,
+                "width" : 70,
+                "tooltip" : "No columns\nAuto-partition",
+                "x_pos" : -27,
+                "id" : "dec-6W",
+                "position" : "middle",
+                "y_pos" : 4,
+                "height" : 50
+              }, {
+                "temporary" : false,
+                "label_allow_return_key" : "save",
+                "label_single_line" : true,
+                "width" : 100,
+                "label_editable" : true,
+                "x_pos" : -18,
+                "id" : "dec-8",
+                "position" : "middle",
+                "label" : "Link_4",
+                "y_pos" : -20,
+                "height" : 80
+              } ],
+              "class_name" : "linkStyle__runMetricsLinkDefaultStyle___ixW31"
+            }
+          },
+          "link_name" : "Link_4",
+          "port_id_ref" : "7d830a03-6175-42c7-be1c-71e20c74c709"
+        } ],
+        "id" : "d6e3ccd1-d5e7-43b6-8afe-f5423fe52d6c",
+        "app_data" : {
+          "ui_data" : {
+            "label" : "inPort",
+            "cardinality" : {
+              "min" : 2,
+              "max" : 2147483646
+            }
+          }
+        },
+        "parameters" : {
+          "runtime_column_propagation" : 1
+        }
+      } ],
+      "id" : "61c1701a-1a32-4837-9820-fba3e400cd21",
+      "type" : "execution_node",
+      "app_data" : {
+        "datastage" : {
+          "inputs_order" : "4e5535c3-858a-4248-9d7a-9b080fa3b014|d6e3ccd1-d5e7-43b6-8afe-f5423fe52d6c",
+          "outputs_order" : "35fa7938-fd7c-4e3f-a986-e82009785bb8"
+        },
+        "ui_data" : {
+          "image" : "/data-intg/flows/graphics/palette/PxJoin.svg",
+          "x_pos" : 649.4399999999999,
+          "label" : "Join_1",
+          "y_pos" : 285.12
+        }
+      },
+      "parameters" : {
+        "hideCaseSensitiveColumn" : true,
+        "showPartType" : true,
+        "keyProperties" : [ {
+          "key" : "EMPLOYEE_CODE"
+        } ],
+        "showCollType" : false,
+        "enableSchemalessDesign" : false,
+        "preserve" : -3,
+        "operator" : "leftouterjoin",
+        "inputName" : "Link_3",
+        "showSortOptions" : false,
+        "combinability" : "auto",
+        "inputcolProperties" : [ ],
+        "InputlinkOrderingList" : [ {
+          "link_label" : "Left",
+          "link_name" : "Link_3"
+        }, {
+          "link_label" : "Right",
+          "link_name" : "Link_4"
+        } ],
+        "output_count" : 1,
+        "execmode" : "default_par",
+        "input_count" : 2
+      }
+    }, {
+      "outputs" : [ {
+        "id" : "0b22ae79-fb55-46a9-a438-d22703a116dd",
+        "app_data" : {
+          "datastage" : {
+            "is_source_of_link" : "f1881d2a-345b-431f-a97e-33765045cdff"
+          },
+          "ui_data" : {
+            "label" : "outPort",
+            "cardinality" : {
+              "min" : 1,
+              "max" : 1
+            }
+          },
+          "additionalProperties" : {
+            "enableAcp" : true
+          }
+        },
+        "parameters" : {
+          "buf_mode" : "default"
+        }
+      } ],
+      "op" : "PxSort",
+      "inputs" : [ {
+        "links" : [ {
+          "node_id_ref" : "61c1701a-1a32-4837-9820-fba3e400cd21",
+          "type_attr" : "PRIMARY",
+          "id" : "b1723656-6373-4859-9563-c8c98169e9b4",
+          "app_data" : {
+            "datastage" : { },
+            "ui_data" : {
+              "decorations" : [ {
+                "image" : "/data-intg/flows/graphics/flows/link-output-handle--default-selected.svg",
+                "temporary" : false,
+                "outline" : false,
+                "distance" : 0,
+                "x_pos" : -10,
+                "id" : "dec-3",
+                "position" : "source",
+                "y_pos" : -10,
+                "class_name" : "linkStartImage"
+              }, {
+                "image" : "/data-intg/flows/graphics/flows/noMeta-autoPartition.svg",
+                "temporary" : false,
+                "outline" : false,
+                "distance" : 5,
+                "width" : 70,
+                "tooltip" : "No columns\nAuto-partition",
+                "x_pos" : -27,
+                "id" : "dec-6W",
+                "position" : "middle",
+                "y_pos" : 4,
+                "height" : 50
+              }, {
+                "temporary" : false,
+                "label_allow_return_key" : "save",
+                "label_single_line" : true,
+                "width" : 100,
+                "label_editable" : true,
+                "x_pos" : -18,
+                "id" : "dec-8",
+                "position" : "middle",
+                "label" : "Link_5",
+                "y_pos" : -20,
+                "height" : 80
+              } ],
+              "class_name" : "linkStyle__runMetricsLinkDefaultStyle___ixW31"
+            }
+          },
+          "link_name" : "Link_5",
+          "port_id_ref" : "35fa7938-fd7c-4e3f-a986-e82009785bb8"
+        } ],
+        "id" : "0b510822-9225-4779-a5a8-fbbc42790740",
+        "app_data" : {
+          "ui_data" : {
+            "label" : "inPort",
+            "cardinality" : {
+              "min" : 1,
+              "max" : 1
+            }
+          }
+        },
+        "parameters" : {
+          "runtime_column_propagation" : 1
+        }
+      } ],
+      "id" : "32d602c9-4b6b-4176-a599-6da2296ac19d",
+      "type" : "execution_node",
+      "app_data" : {
+        "ui_data" : {
+          "image" : "/data-intg/flows/graphics/palette/PxSort.svg",
+          "x_pos" : 823.68,
+          "label" : "Sort_1",
+          "y_pos" : 285.12
+        }
+      },
+      "parameters" : {
+        "showPartType" : true,
+        "keyProperties" : [ {
+          "sorted-clustered" : " ",
+          "asc-desc" : "asc",
+          "key" : "RANKING_CODE"
+        } ],
+        "showCollType" : false,
+        "enableSchemalessDesign" : false,
+        "preserve" : -2,
+        "operator" : "tsort",
+        "inputName" : "Link_5",
+        "showSortOptions" : false,
+        "combinability" : "auto",
+        "inputcolProperties" : [ ],
+        "stats" : " ",
+        "output_count" : 1,
+        "stable" : "stable",
+        "execmode" : "default_par",
+        "input_count" : 1,
+        "unique" : " ",
+        "flagCluster" : " ",
+        "flagKey" : " "
+      }
+    }, {
+      "outputs" : [ {
+        "id" : "",
+        "app_data" : {
+          "ui_data" : {
+            "label" : "outPort",
+            "cardinality" : {
+              "min" : 0,
+              "max" : 1
+            }
+          }
+        }
+      } ],
+      "op" : "PxSequentialFile",
+      "inputs" : [ {
+        "links" : [ {
+          "node_id_ref" : "32d602c9-4b6b-4176-a599-6da2296ac19d",
+          "type_attr" : "PRIMARY",
+          "id" : "f1881d2a-345b-431f-a97e-33765045cdff",
+          "app_data" : {
+            "datastage" : { },
+            "ui_data" : {
+              "decorations" : [ {
+                "image" : "/data-intg/flows/graphics/flows/link-output-handle--default-selected.svg",
+                "temporary" : false,
+                "outline" : false,
+                "distance" : 0,
+                "x_pos" : -10,
+                "id" : "dec-3",
+                "position" : "source",
+                "y_pos" : -10,
+                "class_name" : "linkStartImage"
+              }, {
+                "image" : "/data-intg/flows/graphics/flows/noMeta-collection.svg",
+                "temporary" : false,
+                "outline" : false,
+                "distance" : 0,
+                "width" : 70,
+                "tooltip" : "No columns\nCollection",
+                "x_pos" : -23,
+                "id" : "dec-6H",
+                "position" : "middle",
+                "y_pos" : 4,
+                "height" : 50
+              }, {
+                "temporary" : false,
+                "label_allow_return_key" : "save",
+                "label_single_line" : true,
+                "width" : 100,
+                "label_editable" : true,
+                "x_pos" : -18,
+                "id" : "dec-8",
+                "position" : "middle",
+                "label" : "Link_6",
+                "y_pos" : -20,
+                "height" : 80
+              } ],
+              "class_name" : "linkStyle__runMetricsLinkDefaultStyle___ixW31"
+            }
+          },
+          "link_name" : "Link_6",
+          "port_id_ref" : "0b22ae79-fb55-46a9-a438-d22703a116dd"
+        } ],
+        "id" : "a1181c97-3ab9-460b-9489-86b667d58018",
+        "app_data" : {
+          "ui_data" : {
+            "label" : "inPort",
+            "cardinality" : {
+              "min" : 0,
+              "max" : 1
+            }
+          }
+        },
+        "parameters" : {
+          "final_delim" : "end",
+          "showPartType" : false,
+          "null_field_sep_flag" : false,
+          "file_location" : "file_system",
+          "firstLineColumnNames" : "firstLineColumnNames",
+          "showCollType" : true,
+          "enableFlowAcpControl" : true,
+          "inputName" : "Link_6",
+          "showSortOptions" : false,
+          "append-overwrite" : "overwrite",
+          "rejects" : "continue",
+          "inputcolProperties" : [ ],
+          "file" : [ "Employee_Ranking_#pRunTimestamp#.csv" ],
+          "quote" : "double",
+          "connection_asset_id" : "",
+          "writemethod" : " ",
+          "nocleanup" : " ",
+          "dataAssetName" : "Employee_Ranking_#pRunTimestamp#.csv",
+          "runtime_column_propagation" : 1,
+          "file_format" : "sequential",
+          "registerDataAsset" : true,
+          "delim" : "','"
+        }
+      } ],
+      "id" : "3d3c9a51-db8e-4555-938d-b6d6f127e1b9",
+      "type" : "binding",
+      "app_data" : {
+        "ui_data" : {
+          "image" : "/data-intg/flows/graphics/palette/PxSequentialFile.svg",
+          "x_pos" : 997.92,
+          "label" : "Sequential_file_1",
+          "y_pos" : 285.12
+        }
+      },
+      "parameters" : {
+        "combinability" : "auto",
+        "output_count" : 0,
+        "nls_map_name" : "UTF-8",
+        "input_count" : 1,
+        "execmode" : "default_seq"
+      }
+    }, {
+      "outputs" : [ {
+        "id" : "",
+        "app_data" : {
+          "ui_data" : {
+            "label" : "outPort",
+            "cardinality" : {
+              "min" : 0,
+              "max" : 1
+            }
+          }
+        }
+      } ],
+      "op" : "dashdb",
+      "inputs" : [ {
+        "id" : "",
+        "app_data" : {
+          "ui_data" : {
+            "label" : "inPort",
+            "cardinality" : {
+              "min" : 0,
+              "max" : 1
+            }
+          }
+        },
+        "parameters" : {
+          "part_coll" : "part_type"
+        }
+      } ],
+      "connection" : {
+        "ref" : "51aee35a-e27b-411c-a355-55f65b5fdc05",
+        "project_ref" : "8833164a-8b3b-4596-aa4d-5b93dbdb897f",
+        "properties" : {
+          "_java._heap_size" : 256,
+          "before_after.after_node" : "",
+          "before_after.before_node.fail_on_error" : true,
+          "before_after.after_node.fail_on_error" : true,
+          "batch_size" : 2000,
+          "before_after.before_node" : "",
+          "enableFlowAcpControl" : true,
+          "before_after.before" : "",
+          "before_after.before.fail_on_error" : true,
+          "write_mode" : "insert",
+          "node_number" : 0,
+          "before_after.after" : "",
+          "node_count" : 1,
+          "before_after.after.fail_on_error" : true,
+          "procParamProperties" : [ ],
+          "table_action" : "append"
+        },
+        "name" : "Data Warehouse"
+      },
+      "id" : "e60750a8-16df-4cf1-9a89-49c814ec6a24",
+      "type" : "binding",
+      "app_data" : {
+        "ui_data" : {
+          "image" : "/data-intg/flows/graphics/palette/dashdb.svg",
+          "x_pos" : 47.519999999999996,
+          "label" : "IBM_Db2_Warehouse_1",
+          "y_pos" : 190.07999999999998
+        }
+      },
+      "parameters" : {
+        "combinability" : "auto",
+        "spparam" : [ ],
+        "output_count" : 0,
+        "input_count" : 0,
+        "execmode" : "default_par"
+      }
+    } ],
+    "description" : "",
+    "id" : "d6332152-f4c2-4057-bb62-0b0794e82e19",
+    "app_data" : {
+      "datastage" : {
+        "nls_map_name" : "",
+        "nls_locale" : "OFF"
+      },
+      "ui_data" : {
+        "comments" : [ ]
+      }
+    },
+    "runtime_ref" : "pxOsh"
+  } ],
+  "external_paramsets" : [ ],
+  "json_schema" : "https://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json",
+  "schemas" : [ ],
+  "doc_type" : "pipeline",
+  "id" : "027d9135-d11f-4c7c-95d4-f566988c3a04",
+  "app_data" : {
+    "datastage" : {
+      "timestamp_format" : "",
+      "decimal_separator" : "",
+      "flowRunPriorityQueue" : "",
+      "time_format" : "",
+      "date_format" : "",
+      "message_handlers" : [ ],
+      "version" : "3.0.5"
+    },
+    "additionalProperties" : {
+      "transInputLinkMapper" : { },
+      "ELTDropdown" : {
+        "id" : "nesting",
+        "label" : "Generate nested SQL",
+        "value" : "NESTED_QUERY"
+      },
+      "disableParamsCacheOnFlow" : false,
+      "rcpLinkList" : [ "710ba87e-ba00-4092-b83b-50b6be2133e4", "acfabd55-483a-4893-89e5-0e690c7b0e55", "2ef4912f-349a-4176-99cb-5a441d4ec0c8", "1d216e66-48fb-4ab0-b410-df90c94f03ac", "b1723656-6373-4859-9563-c8c98169e9b4", "f1881d2a-345b-431f-a97e-33765045cdff" ],
+      "globalAcp" : true,
+      "enableRCP" : false,
+      "enableSchemaLessDesign" : false,
+      "runMode" : "ETL"
+    }
+  },
+  "version" : "3.0",
+  "parameters" : {
+    "local_parameters" : [ {
+      "subtype" : "",
+      "name" : "Start_Year",
+      "type" : "int64",
+      "value" : 2020,
+      "prompt" : ""
+    }, {
+      "subtype" : "",
+      "name" : "End_Year",
+      "type" : "int64",
+      "value" : 2021,
+      "prompt" : ""
+    }, {
+      "subtype" : "",
+      "name" : "pRunTimestamp",
+      "type" : "timestamp",
+      "value" : "",
+      "prompt" : "pRunTimestamp"
+    } ]
+  }
+}

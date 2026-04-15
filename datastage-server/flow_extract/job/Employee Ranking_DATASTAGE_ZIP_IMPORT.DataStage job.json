@@ -1,0 +1,46 @@
+{
+  "metadata" : {
+    "name" : "Employee Ranking_DATASTAGE_ZIP_IMPORT.DataStage job",
+    "asset_id" : "1377f93c-1b9e-46e5-9136-1f93e30bdb08",
+    "owner_id" : "1000330999",
+    "version" : 0
+  },
+  "entity" : {
+    "job" : {
+      "asset_ref_type" : "data_intg_flow",
+      "configuration" : {
+        "env_variables" : [ ],
+        "flow_limits" : {
+          "warn_limit" : 100
+        },
+        "runPriorityQueue" : "Medium",
+        "env_type" : "",
+        "env_id" : "ddabcf69-5ec8-4c52-9e81-336fcf02edd2"
+      },
+      "last_run_initiator" : "deprecated field",
+      "last_run_time" : "deprecated field",
+      "last_run_status" : "deprecated field",
+      "last_run_status_timestamp" : 0,
+      "future_scheduled_runs" : [ ],
+      "enable_notifications" : true,
+      "retention_policy" : { },
+      "project_name" : "DataStage Level 3",
+      "asset_ref" : "8d7483ee-86fb-4107-bbdd-b3f6b357531c",
+      "job_parameters" : [ {
+        "name" : "Start_Year",
+        "value" : "2020"
+      }, {
+        "name" : "End_Year",
+        "value" : "2021"
+      }, {
+        "name" : "pRunTimestamp",
+        "value" : ""
+      } ],
+      "schedule_id" : "",
+      "schedule_creator_id" : "",
+      "data_assets_array" : [ "Employee_Ranking_#DSJobStartTimestamp#.csv=Employee_Ranking_#DSJobStartTimestamp#.csv=d0356021-9f84-4f21-ab70-4975526f5265", "Employee_Ranking_.csv=Employee_Ranking_.csv=ce0c6deb-2931-4693-9d41-a5d0576605e1", "Employee_Ranking_Oconv(Date():\"\":Time(),\"D-YMD[4,2,2]\"):\"_\":Oconv(Time(),\"MTS\").csv=Employee_Ranking_Oconv(Date():\"\":Time(),\"D-YMD[4,2,2]\"):\"_\":Oconv(Time(),\"MTS\").csv=56db4f1b-279b-4e76-8dba-d1b79a0e59dd" ],
+      "parameter_sets" : [ ],
+      "flow_name" : "Employee Ranking_DATASTAGE_ZIP_IMPORT"
+    }
+  }
+}

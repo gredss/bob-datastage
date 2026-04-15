@@ -1,0 +1,213 @@
+#### Flow Employee Ranking compiled at 05:59:44 14 Apr 2026
+#################################################################
+#### STAGE: EMPLOYEE_SUMMARY_1
+## Operator
+pxbridge
+## Operator options
+
+-Orientation stage
+-XMLProperties '<?xml version=\'1.0\' encoding=\'UTF-16\' ?><Properties version=\'1.1\'><Common><Context type=\'int\'>1</Context><Variant type=\'string\'>1.0</Variant><DescriptorVersion type=\'string\'>1.0</DescriptorVersion><PartitionType type=\'int\'>-1</PartitionType><RCP type=\'int\'>0</RCP></Common><Connection><database type=\'string\'><![CDATA[BLUDB]]></database><auth_method type=\'int\'><![CDATA[0]]></auth_method><password type=\'protectedstring\'><![CDATA[{dsmenc}Qdq5nngAMQl5YnsfxbtW1DF51rYYLGzmGsHmNU5vdrI=]]></password><port type=\'int\'><![CDATA[50001]]></port><host type=\'string\'><![CDATA[db2w-ovqfeqq.us-south.db2w.cloud.ibm.com]]></host><ssl type=\'bool\'><![CDATA[1]]></ssl><username type=\'string\'><![CDATA[cpdemo]]></username></Connection><Usage><Java><HeapSize type=\'int\'><![CDATA[256]]></HeapSize><OtherOptions type=\'string\'><![CDATA[-Dhttps.protocols=TLSv1.2 -Djdk.tls.client.protocols=TLSv1.2 -Dcom.ibm.jsse2.overrideDefaultTLS=true]]></OtherOptions></Java><after_sql_node type=\'string\'><fail_on_error_after_sql_node type=\'bool\'><![CDATA[1]]></fail_on_error_after_sql_node></after_sql_node><before_sql_node type=\'string\'><fail_on_error_before_sql_node type=\'bool\'><![CDATA[1]]></fail_on_error_before_sql_node></before_sql_node><select_statement type=\'string\'><![CDATA[(SELECT EMPLOYEE_CODE, MAX(SUMMARY_DATE) MAX_DATE,
+
+TIMESTAMPDIFF(16,
+
+CHAR(MAX(SUMMARY_DATE) - MIN(SUMMARY_DATE)) ) as Period_Total_days,
+
+MIN(SALARY) Starting_salary,
+
+MAX(SALARY) Ending_SALARY,
+
+MAX(SALARY) - MIN(SALARY) increase,
+
+SUM(CASE WHEN PAY_INCREASE = 0 THEN 0 ELSE 1 END) nb_increases,
+
+SUM(BONUS * SALARY) BONUS,
+
+SUM(CASE WHEN BONUS = 0 THEN 0 ELSE 1 END) nb_bonus,
+
+SUM(VACATION_DAYS_TAKEN) VACATION_DAYS_TAKEN,
+
+SUM(SICK_DAYS_TAKEN) SICK_DAYS_TAKEN
+
+FROM EMPLOYEE.EMPLOYEE_SUMMARY E2
+
+WHERE (SUMMARY_DATE >= \'[&"Start_Year"]-01-01 00:00:00\'
+
+AND SUMMARY_DATE < \'[&"End_Year"]-01-01 00:00:00\')
+
+GROUP BY EMPLOYEE_CODE)]]></select_statement><before_sql type=\'string\'><fail_on_error_before_sql type=\'bool\'><![CDATA[1]]></fail_on_error_before_sql></before_sql><node_number type=\'int\'><![CDATA[0]]></node_number><read_mode type=\'int\'><![CDATA[2]]></read_mode><decimal_rounding_mode type=\'int\'><![CDATA[2]]></decimal_rounding_mode><default_max_string_binary_precision type=\'int\'><![CDATA[20000]]></default_max_string_binary_precision><generate_unicode_columns type=\'bool\'><![CDATA[0]]></generate_unicode_columns><after_sql type=\'string\'><fail_on_error_after_sql type=\'bool\'><![CDATA[1]]></fail_on_error_after_sql></after_sql><node_count type=\'int\'><![CDATA[1]]></node_count><connector_name type=\'string\'><![CDATA[dashdb]]></connector_name><UserClassName type=\'string\'><![CDATA[com.ibm.iis.cc.genericscapi.GenericSCAPI]]></UserClassName><ConnectorOtherOptions type=\'string\'><![CDATA[-Dcom.ibm.tools.attach.enable=no -Dcom.ibm.is.cc.options=noisfjars]]></ConnectorOtherOptions></Usage></Properties>'
+-connector '{
+variant=\'1.0\',
+library="java:com/ibm/iis/cc/genericscapi/GenericSCAPILibrary,$(DSHOME)/../DSComponents/bin/ccgenericscapi.jar;$(DSHOME)/../DSComponents/bin/scapi;$(DSHOME)/../DSComponents/bin/thirdparty;$(DSHOME)/../DSComponents/bin/ccscapi.jar;$(DSHOME)/../DSComponents/bin/ccjava-api.jar;$(DSHOME)/../DSComponents/bin/ccjava.jar;$(DSHOME)/../DSComponents/bin/ccapi.jar;$(DSHOME)/../DSComponents/bin/JISDocHandler.jar;$(DSHOME)/../../ASBNode/eclipse/plugins/com.ibm.iis.client;$(DSHOME);",
+version=1.0,
+variantlist=\'V1;1.0::"java:com/ibm/iis/cc/genericscapi/GenericSCAPILibrary,$(DSHOME)/../DSComponents/bin/ccgenericscapi.jar;$(DSHOME)/../DSComponents/bin/scapi;$(DSHOME)/../DSComponents/bin/thirdparty;$(DSHOME)/../DSComponents/bin/ccscapi.jar;$(DSHOME)/../DSComponents/bin/ccjava-api.jar;$(DSHOME)/../DSComponents/bin/ccjava.jar;$(DSHOME)/../DSComponents/bin/ccapi.jar;$(DSHOME)/../DSComponents/bin/JISDocHandler.jar;$(DSHOME)/../../ASBNode/eclipse/plugins/com.ibm.iis.client;$(DSHOME);"\',
+versionlist=\'1.0\',
+name=GenericSCAPI
+}'
+
+-linkXMLProperties source 0 '<?xml version=\'1.0\' encoding=\'UTF-16\'?><Properties version=\'1.1\'><Common><Context type=\'int\'>1</Context><Variant type=\'string\'>1.0</Variant><Reject></Reject><DescriptorVersion type=\'string\'>1.0</DescriptorVersion><PartitionType type=\'int\'>-1</PartitionType><RCP type=\'int\'>1</RCP></Common><Usage></Usage></Properties >'
+-source 0 '{
+DSSchema=\'record
+()\'
+}'
+## General options
+[ident('EMPLOYEE_SUMMARY_1'); jobmon_ident('EMPLOYEE_SUMMARY_1'); stage_ident('dashdb')]
+## Outputs
+0> [] 'EMPLOYEE_SUMMARY_1:Link_1.v'
+;
+#################################################################
+#### STAGE: RANKING_RESULTS_1
+## Operator
+pxbridge
+## Operator options
+
+-Orientation stage
+-XMLProperties '<?xml version=\'1.0\' encoding=\'UTF-16\' ?><Properties version=\'1.1\'><Common><Context type=\'int\'>1</Context><Variant type=\'string\'>1.0</Variant><DescriptorVersion type=\'string\'>1.0</DescriptorVersion><PartitionType type=\'int\'>-1</PartitionType><RCP type=\'int\'>0</RCP></Common><Connection><database type=\'string\'><![CDATA[BLUDB]]></database><auth_method type=\'int\'><![CDATA[0]]></auth_method><password type=\'protectedstring\'><![CDATA[{dsmenc}Qdq5nngAMQl5YnsfxbtW1DF51rYYLGzmGsHmNU5vdrI=]]></password><port type=\'int\'><![CDATA[50001]]></port><host type=\'string\'><![CDATA[db2w-ovqfeqq.us-south.db2w.cloud.ibm.com]]></host><ssl type=\'bool\'><![CDATA[1]]></ssl><username type=\'string\'><![CDATA[cpdemo]]></username></Connection><Usage><Java><HeapSize type=\'int\'><![CDATA[256]]></HeapSize><OtherOptions type=\'string\'><![CDATA[-Dhttps.protocols=TLSv1.2 -Djdk.tls.client.protocols=TLSv1.2 -Dcom.ibm.jsse2.overrideDefaultTLS=true]]></OtherOptions></Java><after_sql_node type=\'string\'><fail_on_error_after_sql_node type=\'bool\'><![CDATA[1]]></fail_on_error_after_sql_node></after_sql_node><before_sql_node type=\'string\'><fail_on_error_before_sql_node type=\'bool\'><![CDATA[1]]></fail_on_error_before_sql_node></before_sql_node><select_statement type=\'string\'><![CDATA[(SELECT EMP.EMPLOYEE_CODE, RANKING_CODE
+
+FROM EMPLOYEE.EMPLOYEE EMP LEFT OUTER JOIN
+
+(SELECT RK.*
+
+FROM EMPLOYEE.RANKING_RESULTS RK,
+
+(SELECT TB0.EMPLOYEE_CODE,
+
+MAX(TB0.RANKING_DATE) RANKING_DATE
+
+FROM EMPLOYEE.RANKING_RESULTS TB0
+
+WHERE RANKING_DATE < \'[&"End_Year"]-01-01 00:00:00\'
+
+GROUP BY TB0.EMPLOYEE_CODE
+
+) TB1
+
+WHERE RK.EMPLOYEE_CODE = TB1.EMPLOYEE_CODE
+
+AND RK.RANKING_DATE = TB1.RANKING_DATE) RK1
+
+ON EMP.EMPLOYEE_CODE = RK1.EMPLOYEE_CODE
+
+)]]></select_statement><before_sql type=\'string\'><fail_on_error_before_sql type=\'bool\'><![CDATA[1]]></fail_on_error_before_sql></before_sql><node_number type=\'int\'><![CDATA[0]]></node_number><read_mode type=\'int\'><![CDATA[2]]></read_mode><decimal_rounding_mode type=\'int\'><![CDATA[2]]></decimal_rounding_mode><default_max_string_binary_precision type=\'int\'><![CDATA[20000]]></default_max_string_binary_precision><generate_unicode_columns type=\'bool\'><![CDATA[0]]></generate_unicode_columns><after_sql type=\'string\'><fail_on_error_after_sql type=\'bool\'><![CDATA[1]]></fail_on_error_after_sql></after_sql><node_count type=\'int\'><![CDATA[1]]></node_count><connector_name type=\'string\'><![CDATA[dashdb]]></connector_name><UserClassName type=\'string\'><![CDATA[com.ibm.iis.cc.genericscapi.GenericSCAPI]]></UserClassName><ConnectorOtherOptions type=\'string\'><![CDATA[-Dcom.ibm.tools.attach.enable=no -Dcom.ibm.is.cc.options=noisfjars]]></ConnectorOtherOptions></Usage></Properties>'
+-connector '{
+variant=\'1.0\',
+library="java:com/ibm/iis/cc/genericscapi/GenericSCAPILibrary,$(DSHOME)/../DSComponents/bin/ccgenericscapi.jar;$(DSHOME)/../DSComponents/bin/scapi;$(DSHOME)/../DSComponents/bin/thirdparty;$(DSHOME)/../DSComponents/bin/ccscapi.jar;$(DSHOME)/../DSComponents/bin/ccjava-api.jar;$(DSHOME)/../DSComponents/bin/ccjava.jar;$(DSHOME)/../DSComponents/bin/ccapi.jar;$(DSHOME)/../DSComponents/bin/JISDocHandler.jar;$(DSHOME)/../../ASBNode/eclipse/plugins/com.ibm.iis.client;$(DSHOME);",
+version=1.0,
+variantlist=\'V1;1.0::"java:com/ibm/iis/cc/genericscapi/GenericSCAPILibrary,$(DSHOME)/../DSComponents/bin/ccgenericscapi.jar;$(DSHOME)/../DSComponents/bin/scapi;$(DSHOME)/../DSComponents/bin/thirdparty;$(DSHOME)/../DSComponents/bin/ccscapi.jar;$(DSHOME)/../DSComponents/bin/ccjava-api.jar;$(DSHOME)/../DSComponents/bin/ccjava.jar;$(DSHOME)/../DSComponents/bin/ccapi.jar;$(DSHOME)/../DSComponents/bin/JISDocHandler.jar;$(DSHOME)/../../ASBNode/eclipse/plugins/com.ibm.iis.client;$(DSHOME);"\',
+versionlist=\'1.0\',
+name=GenericSCAPI
+}'
+
+-linkXMLProperties source 0 '<?xml version=\'1.0\' encoding=\'UTF-16\'?><Properties version=\'1.1\'><Common><Context type=\'int\'>1</Context><Variant type=\'string\'>1.0</Variant><Reject></Reject><DescriptorVersion type=\'string\'>1.0</DescriptorVersion><PartitionType type=\'int\'>-1</PartitionType><RCP type=\'int\'>1</RCP></Common><Usage></Usage></Properties >'
+-source 0 '{
+DSSchema=\'record
+()\'
+}'
+## General options
+[ident('RANKING_RESULTS_1'); jobmon_ident('RANKING_RESULTS_1'); stage_ident('dashdb')]
+## Outputs
+0> [] 'RANKING_RESULTS_1:Link_2.v'
+;
+#################################################################
+#### STAGE: Peek_1
+## Operator
+peek
+## Operator options
+-nrecs 10
+-name
+
+
+
+
+## General options
+[ident('Peek_1'); jobmon_ident('Peek_1'); stage_ident('PxPeek')]
+## Inputs
+0< [] 'EMPLOYEE_SUMMARY_1:Link_1.v'
+
+
+## Outputs
+0> [] 'Peek_1:Link_3.v'
+;
+#################################################################
+#### STAGE: Peek_2
+## Operator
+peek
+## Operator options
+-nrecs 10
+-name
+
+
+
+
+## General options
+[ident('Peek_2'); jobmon_ident('Peek_2'); stage_ident('PxPeek')]
+## Inputs
+0< [] 'RANKING_RESULTS_1:Link_2.v'
+
+
+## Outputs
+0> [] 'Peek_2:Link_4.v'
+;
+#################################################################
+#### STAGE: Join_2
+## Operator
+leftouterjoin
+## Operator options
+-key 'EMPLOYEE_CODE'
+
+
+
+
+## General options
+[ident('Join_2'); jobmon_ident('Join_2'); stage_ident('PxJoin')]
+## Inputs
+0< [] 'Peek_2:Link_4.v'
+
+
+1< [] 'Peek_1:Link_3.v'
+
+
+## Outputs
+0> [] 'Join_2:Link_5.v'
+;
+#################################################################
+#### STAGE: Sort_1
+## Operator
+tsort
+## Operator options
+-key 'RANKING_CODE'
+-asc
+-stable
+
+
+
+
+## General options
+[ident('Sort_1'); jobmon_ident('Sort_1'); stage_ident('PxSort')]
+## Inputs
+0< [] 'Join_2:Link_5.v'
+
+
+## Outputs
+0> [] 'Sort_1:Link_6.v'
+;
+#################################################################
+#### STAGE: Sequential_file_1
+## Operator
+export
+## Operator options
+-schema record
+  {final_delim=end, quote=double, delim=',', null_field=''}
+()
+-dataAssetName 'Employee_Ranking.csv'
+-file 'Employee_Ranking.csv'
+-firstLineColumnNames
+-overwrite
+-rejects continue
+
+
+
+## General options
+[ident('Sequential_file_1'); jobmon_ident('Sequential_file_1'); stage_ident('PxSequentialFile')]
+## Inputs
+0< [] 'Sort_1:Link_6.v'
+;

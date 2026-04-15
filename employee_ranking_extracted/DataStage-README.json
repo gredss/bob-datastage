@@ -1,0 +1,53 @@
+{
+  "project_name" : "DataStage Level 3",
+  "project_id" : "4efb8e4d-15b2-486c-ba6f-d5c99f3d5272",
+  "created_by" : "admin",
+  "created_at" : "2026-04-14T06:23:49.067626224Z",
+  "environment" : "cp4d",
+  "services_info" : [ {
+    "name" : "ds-canvas",
+    "version" : "503.0.33"
+  }, {
+    "name" : "ds-flows",
+    "version" : "503.0.12"
+  }, {
+    "name" : "ds-codegen",
+    "version" : "503.0.12"
+  }, {
+    "name" : "ds-flow-runtime",
+    "version" : "503.0.4"
+  }, {
+    "name" : "ds-migration",
+    "version" : "503.0.23"
+  }, {
+    "name" : "DSAssets",
+    "version" : "503.0.6"
+  }, {
+    "name" : "ds-cas-lite",
+    "version" : "503.0.4"
+  }, {
+    "name" : "ds-px-runtime",
+    "version" : "503.0.22"
+  }, {
+    "name" : "qs-ruleset",
+    "version" : "503.0.5"
+  } ],
+  "assets" : [ {
+    "name" : "default_datastage_px",
+    "type" : "environment"
+  }, {
+    "name" : "Employee Ranking.DataStage job",
+    "type" : "job"
+  }, {
+    "name" : "Employee Ranking",
+    "type" : "px_executables",
+    "location" : "Employee Ranking"
+  }, {
+    "name" : "Employee Ranking",
+    "type" : "data_intg_flow"
+  }, {
+    "name" : "Data Warehouse",
+    "type" : "connection"
+  } ],
+  "flow_job_mapping" : [ ]
+}

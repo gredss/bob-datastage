@@ -1,0 +1,41 @@
+{
+  "metadata" : {
+    "name" : "Employee Ranking.DataStage job",
+    "asset_id" : "fc68578f-3603-44a3-ae0f-7958088abb3a",
+    "owner_id" : "1000330999",
+    "version" : 0
+  },
+  "entity" : {
+    "job" : {
+      "asset_ref_type" : "data_intg_flow",
+      "configuration" : {
+        "env_variables" : [ ],
+        "flow_limits" : {
+          "warn_limit" : 100
+        },
+        "env_id" : "02a96cb7-7f5e-405c-90cc-3325cffa0dee",
+        "env_type" : "datastage"
+      },
+      "last_run_initiator" : "deprecated field",
+      "last_run_time" : "deprecated field",
+      "last_run_status" : "deprecated field",
+      "last_run_status_timestamp" : 0,
+      "future_scheduled_runs" : [ ],
+      "enable_notifications" : true,
+      "project_name" : "DataStage Level 3",
+      "asset_ref" : "bbe644af-b2b2-49ec-9bc5-98c4f2e43e21",
+      "job_parameters" : [ {
+        "name" : "Start_Year",
+        "value" : 2020
+      }, {
+        "name" : "End_Year",
+        "value" : 2021
+      } ],
+      "parameter_sets" : [ ],
+      "schedule_id" : "",
+      "schedule_creator_id" : "",
+      "data_assets_array" : [ "Employee_Ranking.csv=Employee_Ranking.csv=2a31e6b1-7a88-42d5-8071-7f0126f71e8d" ],
+      "flow_name" : "Employee Ranking"
+    }
+  }
+}

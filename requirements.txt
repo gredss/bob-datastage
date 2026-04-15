@@ -1,0 +1,8 @@
+# Core dependencies
+streamlit>=1.30.0
+requests>=2.31.0
+pyyaml>=6.0
+python-dotenv>=1.0.0
+
+# Additional utilities
+pandas>=2.0.0

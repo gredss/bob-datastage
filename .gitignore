@@ -20,6 +20,10 @@ wheels/
 .installed.cfg
 *.egg
 
+# Node.js
+node_modules/
+package-lock.json
+
 # Virtual Environment
 venv/
 env/
@@ -60,3 +64,14 @@ htmlcov/
 *.tmp
 *.bak
 *.cache
+
+# Legacy files (no longer needed after MCP migration)
+datastage_mcp_server.py
+datastage_api.py
+bob_orchestrator.py
+streamlit_app.py
+add_peek_component.py
+ROADMAP.md
+
+# Temporary ZIP exports
+*.zip
