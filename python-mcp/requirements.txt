@@ -1,0 +1,9 @@
+# Core dependencies - Using FastMCP
+fastmcp>=0.1.0
+httpx>=0.27.0
+pydantic>=2.0.0
+
+# IBM DataStage SDK for code generation
+ibm-watsonx-data-integration>=1.0.0
+
+# Made with Bob
